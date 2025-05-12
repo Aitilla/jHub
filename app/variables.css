@@ -1,0 +1,65 @@
+@property --primaryBackground {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #dcd3fd;
+}
+
+@property --secondaryBackground {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #f0edfe;
+}
+
+@property --boxColor{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #FFF;
+}
+
+@property --shine {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #faf4fc;
+}
+
+@property --primaryText {
+    syntax: "<color>";
+    inherits: false;
+  initial-value: #020202;
+}
+
+@property --focusText {
+    syntax: "<color>";
+    inherits: false;
+  initial-value: #331c8b;
+}
+
+@property --focusBackground {
+    syntax: "<color>";
+    inherits: false;
+  initial-value: #f3ecfc;
+}
+
+@property --positiveText{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #10671C;
+}
+
+@property --positiveBackground{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #E8FAED;
+}
+
+@property --negativeText{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #D0171D;
+}
+
+@property --negativeBackground{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #FBF0ED;
+}
