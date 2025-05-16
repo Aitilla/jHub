@@ -1,0 +1,20 @@
+.ruterContainer{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    div{
+        width: 80%;
+        padding: 10px;
+        border: 2px solid white;
+    }
+    .filtering{
+        height: 50px;
+    }
+    .pinned{
+        height: 400px;
+        margin-top: 60px;
+    }
+  }
+  

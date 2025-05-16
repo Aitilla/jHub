@@ -1,4 +1,5 @@
 import styles from "./Login.module.css";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -14,7 +15,7 @@ const Login = () => {
             <input type="password" />
           </div>
         </div>
-        <h2>Login</h2>
+        <Link href={"/pages/ruter"} >Login</Link>
       </div>
     </div>
   );
