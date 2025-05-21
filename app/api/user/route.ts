@@ -7,5 +7,5 @@ const supabase = createClient(
 
 export async function GET() {
   let { data: User, error } = await supabase.from("User").select("*");
-  console.log(User)
+  return Response.json({ User: User?.[0]??null, error})
 }
