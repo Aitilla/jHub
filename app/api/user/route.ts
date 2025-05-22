@@ -6,6 +6,6 @@ const supabase = createClient(
 );
 
 export async function GET() {
-  let { data: User, error } = await supabase.from("User").select("*");
+  const { data: User, error } = await supabase.from("User").select("username");
   return Response.json({ User: User?.[0]??null, error})
 }
