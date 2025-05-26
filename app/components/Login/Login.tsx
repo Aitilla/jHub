@@ -4,23 +4,23 @@ import { useEffect } from "react";
 import { useSimpleFetch } from "@/app/hooks/useSimpleFetch";
 
 const Login = () => {
-  const { data, loading, error, refresh } = useSimpleFetch("/api/user");
+  // const { data, loading, error, refresh } = useSimpleFetch("/api/user");
 
-  useEffect(() => {
-    const int = setInterval(refresh, 1000 * 1000);
-    return () => {
-      clearInterval(int);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const int = setInterval(refresh, 1000 * 1000);
+  //   return () => {
+  //     clearInterval(int);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    console.log("CALLED");
+  // useEffect(() => {
+  //   console.log("CALLED");
 
-    console.log(data)
-    console.log(loading);
-    console.log(error);
-    console.log("CALLED");
-  }, [data, loading, error]);
+  //   console.log(data)
+  //   console.log(loading);
+  //   console.log(error);
+  //   console.log("CALLED");
+  // }, [data, loading, error]);
 
   return (
     <div className={styles.container}>
