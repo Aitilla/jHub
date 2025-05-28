@@ -6,7 +6,7 @@ export default function Home() {
   const setNewView = async () => {
     const { data, error } = await supabaseAdmin
       .from("Users")
-      .insert({ username: "rawr ", email: "rawr@rawr.rawr", password: "rawr" });
+      .insert();
 
       if (data) console.log(data)
       if (error) console.log(error)

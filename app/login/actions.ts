@@ -1,5 +1,6 @@
 "use server";
 
+import { encrypt } from "../lib/encrypt";
 import { supabaseAdmin, supabase } from "../lib/supabase";
 
 export async function login(formData: FormData) {
@@ -8,9 +9,7 @@ export async function login(formData: FormData) {
     username: formData.get("username") as string,
     password: formData.get("password") as string,
   };
-  console.log(input);
   const getUser = async (username: string, password: string) => {
-    console.log(username);
     const { data: users, error } = await supabase
       .from("Users")
       .select("*")
@@ -18,23 +17,32 @@ export async function login(formData: FormData) {
     if (error) {
       console.log(error);
     }
-    const user = users?.[0]; 
+    const user = users?.[0];
 
     if (user.password === password) {
       session = true;
-      console.log(password)
-      console.log(session);
+      const hashedPassword = await encrypt(password);
+      console.log(hashedPassword);
     } else {
-      console.log("rawrrr");
+      console.log("raawrrr");
     }
   };
-  getUser(input.username, input.password);
+  await getUser(input.username, input.password);
 }
 
 export async function signup(formData: FormData) {
-  const data = {
+  const input = {
     email: formData.get("email") as string,
     username: formData.get("username") as string,
-    password: formData.get("password") as string,
+    password: await encrypt(formData.get("password") as string),
   };
+  const createUser = async (email: string, username: string, password: any) => {
+    if (email || username || password === "") {
+      console.log("incorrect input");
+    }
+    const { data: users, error } = await supabaseAdmin
+      .from("Users")
+      .insert({ username: "", email: "", password: "" });
+  };
+  await createUser(input.email, input.username, input.password);
 }
