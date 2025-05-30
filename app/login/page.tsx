@@ -10,6 +10,8 @@ export default function LoginPage() {
           <div className={styles.credentialsContainer}>
             <div className={`${styles.credentials}`}>
               <form>
+                <label htmlFor="email">Email</label>
+                <input id="email" name="email" type="email" />
                 <label htmlFor="username">Username</label>
                 <input id="username" name="username" type="username" required />
                 <label htmlFor="password">Password</label>
