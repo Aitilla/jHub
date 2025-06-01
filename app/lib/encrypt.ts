@@ -8,6 +8,6 @@ export async function encrypt(password: string) {
 }
 
 export async function verify(password: string, storedPassword: string) {
-  const passwordMatched = await bcrypt.compare(password, storedPassword);
+  const passwordMatched: boolean = await bcrypt.compare(password, storedPassword);
   return passwordMatched
 }

@@ -3,45 +3,46 @@
 import { encrypt, verify } from "../lib/encrypt";
 import { supabaseAdmin, supabase } from "../lib/supabase";
 
-export async function login(formData: FormData) {
-  let session = false;
+export async function login(formData: FormData): Promise<{ success: boolean }> {
   const input = {
     username: formData.get("username") as string,
-    password: "password" as string,
+    password: formData.get("password") as string,
   };
-  const getUser = async (username: string, password: any) => {
-    const { data: users, error } = await supabase
-      .from("Users")
-      .select("*")
-      .eq("username", username);
-    if (error) {
-      console.log(error);
-    }
-    const user = users?.[0];
+  const { data: users, error } = await supabase
+    .from("Users")
+    .select("*")
+    .eq("username", input.username);
+  if (error) {
+    console.log(error);
+    return { success: false };
+  }
 
-    
+  const user = users?.[0];
+  if (!user) return { success: false };
 
-  };
-  await getUser(input.username, input.password);
+  const isValid = await verify(input.password, user.password);
+  if (!isValid) return { success: false };
+
+  return { success: true };
 }
 
-export async function signup(formData: FormData) {
+export async function signup(
+  formData: FormData
+): Promise<{ success: boolean }> {
   const input = {
     email: formData.get("email") as string,
     username: formData.get("username") as string,
     password: await encrypt(formData.get("password") as string),
   };
-  const createUser = async (email: string, username: string, password: any) => {
-    const { data: users, error } = await supabaseAdmin
-      .from("Users")
-      .insert({
-        email: input.email,
-        username: input.username,
-        password: input.password,
-      });
-      console.log(users)
-      console.log(error)
-  };
+  const { data: users, error } = await supabaseAdmin.from("Users").insert({
+    email: input.email,
+    username: input.username,
+    password: input.password,
+  });
+  if (error) {
+    console.log(error);
+    return { success: false };
+  }
 
-  await createUser(input.email, input.username, input.password);
+  return { success: true };
 }

@@ -1,7 +1,21 @@
+"use client";
+
 import { login, signup } from "./actions";
+import { useRouter } from "next/router";
 import styles from "./Login.module.css";
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  const handleLogin = async (formData: FormData) => {
+    const result = await login(formData);
+    if (result.success) {
+      router.replace("/");
+    } else {
+      console.log("Login failed");
+    }
+  };
+
   return (
     <div className="main">
       <div className={styles.container}>
@@ -9,7 +23,7 @@ export default function LoginPage() {
           <h2>Credentials</h2>
           <div className={styles.credentialsContainer}>
             <div className={`${styles.credentials}`}>
-              <form>
+              <form action={handleLogin}>
                 <label htmlFor="email">Email</label>
                 <input id="email" name="email" type="email" />
                 <label htmlFor="username">Username</label>
