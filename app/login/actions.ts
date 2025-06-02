@@ -3,6 +3,16 @@
 import { encrypt, verify } from "../lib/encrypt";
 import { supabaseAdmin, supabase } from "../lib/supabase";
 
+export async function auth(formData: FormData): Promise<{ success: boolean }> {
+  const mode = formData.get("mode");
+
+  if (mode === "signup") {
+    return await signup(formData);
+  } else {
+    return await login(formData);
+  }
+}
+
 export async function login(formData: FormData): Promise<{ success: boolean }> {
   const input = {
     username: formData.get("username") as string,
